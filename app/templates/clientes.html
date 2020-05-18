@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Listado de clientes | Quoter{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <a href="/detalle-clientes">Ver clientes registrados</a>
+        </div>
+        <div class="col-6">
+            <a href="/registro-cliente">Registrar nuevo cliente</a>
+        </div>
+    </div>
+</div> -->
+<!-- <form action="/clientes" method="POST">
+    <select name="clientes"> -->
+        {# for cliente in clientes #}
+        <!-- <option value="{{ cliente }}">{{ cliente }}</option> -->
+        {# endfor #}
+    <!-- </select>
+    <input type="submit" value="Ver detalles">
+</form> -->
+
+<table>
+    <thead>
+        <tr>
+            <td>Cliente</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente }}</td>
+            <td>
+                <a href="/clientes/ver/{{ cliente.lower() }}">Ver</a>
+                <a href="/clientes/editar/{{ cliente.lower() }}">Editar</a>
+                <a href="/clientes/eliminar/{{ cliente.lower() }}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

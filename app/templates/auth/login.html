@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Quoter{% endblock %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block page_content %}
+
+<header>
+    <h1>Iniciar Sesión</h1>
+</header>
+
+<form action="{{ url_for('auth.login') }}" method="POST">
+    <p>
+        <input type="email" name="email" placeholder="Correo electrónico">
+    </p>
+    <p>
+        <input type="password" name="password" placeholder="Contraseña">
+    </p>
+    <p>
+        <input type="submit" value="Iniciar Sesión">
+    </p>
+</form>
+
+<p>
+    ¿Nuevo Usuario?
+    <a href="{{ url_for('auth.signup') }}">Click aquí para registrarse</a>
+</p>
+
+{% endblock page_content %}

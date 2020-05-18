@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block page_content %}
+<header>
+    <h1>Quoter</h1>
+</header>
+<section>
+    <div>
+        <a href="{{ url_for('auth.login') }}">Iniciar Sesión</a>
+        <a href="{{ url_for('auth.signup') }}">Registrarse</a>
+    </div>
+</section>
+{% endblock page_content %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Cotizaciones | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<header>
+    <h1>Historial de cotizaciones por cliente</h1>
+</header>
+
+<section>
+    <div>
+        <p>
+            <h2>{{ cliente.razon_social }}</h2>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <td>Folio</td>
+                    <td>Fecha</td>
+                    <td>Palabras clave</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cotizacion in cotizaciones %}
+                <tr>
+                    <td>{{ cotizacion.folio }}</td>
+                    <td>{{ cotizacion.fecha }}</td>
+                    <td>{{ cotizacion.resumen }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock page_content %}

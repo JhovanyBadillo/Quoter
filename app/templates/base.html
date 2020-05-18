@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quoter{% endblock title %}</title>
+    {% block icons %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    {% endblock icons %}
+</head>
+
+<body>
+    {% block navbar %}
+    <nav>
+        <a href="{{ url_for('main.menu') }}">Quoter</a>
+        <ul>
+            <li>
+                <a href="{{ url_for('main.menu') }}">Home</a>
+            </li>
+            <li>
+                <a href="{{ url_for('clients.listado_clientes') }}">Clientes</a>
+            </li>
+            <li>
+                <a href="#">Contactos</a>
+            </li>
+            <li>
+                <a href="#">Productos</a>
+            </li>
+            <li>
+                <a href="#">Cotizaciones</a>
+            </li>
+            <li>
+                <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
+            </li>
+        </ul>
+    </nav>
+    {% endblock navbar %}
+
+    {% block content %}
+
+    {% for message in get_flashed_messages() %}
+    <div>
+        <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}
+
+    {% endblock page_content %}
+    
+    {% endblock content %}
+
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+
+</html>

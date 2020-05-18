@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar cliente | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<section>
+    <div>
+        <form action="{{ url_for('clients.agregar_cliente') }}" method="POST">
+            <div>
+                <input type="text" name="razon_social" placeholder="Razón Social" required>
+            </div>
+            <div>
+                <input type="text" name="rfc" id="rfc" placeholder="RFC" required>
+            </div>
+            <div>
+                <input type="text" name="nombre_corto" id="nombre_corto" placeholder="Nombre corto" required>
+            </div>
+            <div>
+                <input type="text" name="telefono" placeholder="Teléfono de contacto">
+            </div>
+            <div>
+                <input type="text" name="calle_numero" placeholder="Calle y número">
+            </div>
+            <div>
+                <input type="text" name="colonia" placeholder="Colonia">
+            </div>
+            <div>
+                <input type="text" name="municipio" placeholder="Municipio">
+            </div>
+            <div>
+                <input type="text" name="estado" placeholder="Estado">
+            </div>
+            <div>
+                <input type="text" name="cp" id="cp" placeholder="Código Postal">
+            </div>
+            <div>
+                <input type="submit" value="Agregar Cliente">
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock page_content %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/agregar_cliente.js') }}">
+</script>
+{% endblock scripts %}

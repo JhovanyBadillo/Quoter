@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Registro | Quoter{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block page_content %}
+
+<header>
+    <h1>Registro</h1>
+</header>
+
+<section>
+    <form action="{{ url_for('auth.signup') }}" method="post">
+        <p>
+            <input type="email" name="email" placeholder="Correo electrónico">
+        </p>
+        <p>
+            <input type="password" name="password" id="password" placeholder="Contraseña">
+        </p>
+        <p>
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña">
+        </p>
+        <p>
+            <input type="submit" value="Registrarse">
+        </p>
+    </form>
+
+    <p>
+        ¿Ya estás registrado?
+        <a href="{{ url_for('auth.login') }}">Click aquí para iniciar sesión</a>
+    </p>
+
+</section>
+{% endblock page_content %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/signup.js') }}">
+</script>
+{% endblock scripts %}

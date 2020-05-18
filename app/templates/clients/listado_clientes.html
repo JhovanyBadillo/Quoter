@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Clientes | Quoter{% endblock title %}
+
+{% block page_content %}
+<header>
+    <h1>Listado de clientes</h1>
+</header>
+
+<section>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Razón Social</td>
+                    <td>RFC</td>
+                    <td>Historial de cotizaciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.razon_social }}</td>
+                    <td>{{ cliente.rfc }}</td>
+                    <td>
+                        <a href="{{ url_for('clients.historial', cliente=cliente.nombre_corto) }}">Ver</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section>
+    <div>
+        <p>
+            <a href="{{ url_for('clients.agregar_cliente') }}">Agregar cliente</a>
+        </p>
+    </div>
+</section>
+
+{% endblock page_content %}
