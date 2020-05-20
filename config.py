@@ -3,6 +3,12 @@ from datetime import timedelta
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
+    """
+    Conjunto de parámetros que se incluirán en app.config[]
+    He encontrado que SEND_FILE_MAX_AGE_DEFAULT establece el tiempo
+    de vida en la caché del navegador de los archivos estáticos, i.e.,
+    los que están en la carpeta static (js, css, etc).
+    """
     SECRET_KEY = os.environ.get('SECRET_KEY', default=b'Ana')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = os.environ.get('MAIL_SERVER', default='smtp.googlemail.com')
@@ -11,6 +17,7 @@ class Config:
         ['true', 'on', '1']
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    SEND_FILE_MAX_AGE_DEFAULT = 30  # Sets Cache-Control header with max-age=30
     # PERMANENT_SESSION_LIFETIME = timedelta(seconds=900)
 
     @staticmethod
