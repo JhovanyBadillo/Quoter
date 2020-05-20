@@ -30,6 +30,25 @@ def agregar_cliente():
         return redirect(url_for('clients.listado_clientes'))
     return render_template('clients/agregar_cliente.html')
 
+@clients.route('/editar-cliente/<string:cliente>', methods=['GET', 'POST'])
+@login_required
+def editar_cliente(cliente):
+    """
+    Esta función NO compara los datos almacenados del cliente a modificar con los
+    que se reciben en request.form. Se reescriben los campos en el registro correspondiente
+    del cliente solamente si el dato modificado no es un string de longitud 0. 
+    """
+    cliente_a_editar = Cliente.query.filter_by(nombre_corto=cliente).first()
+    if request.method == 'POST':
+        for dato in request.form.keys():
+            if len(request.form[dato]) > 0:
+                setattr(cliente_a_editar, dato, request.form[dato])
+        db.session.add(cliente_a_editar)
+        db.session.commit()
+        flash('Se han guardado los cambios')
+        return redirect(url_for('clients.listado_clientes'))
+    return render_template('clients/editar_cliente.html', cliente=cliente_a_editar)
+
 # @clients.route('/', methods=['GET', 'POST'])
 # @login_required
 # def seleccionar_cliente():

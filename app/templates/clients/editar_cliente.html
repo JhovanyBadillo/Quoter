@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Editar cliente | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<section>
+    <div>
+        <form action="{{ url_for('clients.editar_cliente', cliente=cliente.nombre_corto) }}" method="POST">
+            <div>
+                <input type="text" name="razon_social" id="razon_social" value="{{ cliente.razon_social }}" placeholder="Razón Social" required>
+            </div>
+            <div>
+                <input type="text" name="rfc" id="rfc" value="{{ cliente.rfc }}" placeholder="RFC" required>
+            </div>
+            <div>
+                <input type="text" name="nombre_corto" id="nombre_corto" value="{{ cliente.nombre_corto }}" placeholder="Nombre corto" required>
+            </div>
+            <div>
+                <input type="text" name="telefono" value="{{ cliente.telefono }}" placeholder="Teléfono de contacto">
+            </div>
+            <div>
+                <input type="text" name="calle_numero" value="{{ cliente.calle_numero }}" placeholder="Calle y número">
+            </div>
+            <div>
+                <input type="text" name="colonia" value="{{ cliente.colonia }}" placeholder="Colonia">
+            </div>
+            <div>
+                <input type="text" name="municipio" value="{{ cliente.municipio }}" placeholder="Municipio">
+            </div>
+            <div>
+                <input type="text" name="estado" value="{{ cliente.estado }}" placeholder="Estado">
+            </div>
+            <div>
+                <input type="text" name="cp" id="cp" value="{{ cliente.cp }}" placeholder="Código Postal">
+            </div>
+            <div>
+                <input type="submit" value="Guardar cambios"><a href="{{ url_for('clients.listado_clientes') }}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock page_content %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/agregar_cliente.js') }}"></script>
+
+{% endblock scripts %}
