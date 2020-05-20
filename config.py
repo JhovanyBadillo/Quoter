@@ -28,7 +28,7 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'quotations-dev.sqlite')
+        'postgres://' + os.path.join(basedir, 'quotations-dev.sqlite')
 
 
 class TestingConfig(Config):
