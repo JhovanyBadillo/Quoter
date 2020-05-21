@@ -28,18 +28,18 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'postgres://' + os.path.join(basedir, 'quotations-dev.sqlite')
+        'postgres://jhovany:avntjh2411@localhost/quotations-dev'
 
 
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite://'
+        'postgres://jhovany:avntjh2411@localhost/quotations-test'
 
     
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'quotations.sqlite')
+        'postgres://jhovany:avntjh2411@localhost/quotations'
 
 
 config = {
