@@ -52,9 +52,24 @@ class Cliente(db.Model):
     estado          = db.Column(db.String(100))
 
     cotizaciones = db.relationship('Cotizacion', backref='cliente', lazy='dynamic')
+    productos    = db.relationship('Producto', backref='cliente', lazy='dynamic')
 
     def __repr__(self):
         return '<Cliente %r>' % self.nombre_corto
+
+
+class Producto(db.Model):
+    __tablename__ = 'productos'
+
+    id              = db.Column(db.Integer, primary_key=True, nullable=False)
+    cliente_id      = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
+    sku             = db.Column(db.String(15), nullable=False, index=True, unique=True)
+    medicion        = db.Column(db.String(100), nullable=False)
+    descripcion     = db.Column(db.Text(), nullable=False)
+    precio_unitario = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return '<Producto %r>' % self.sku
 
 
 class Cotizacion(db.Model):
