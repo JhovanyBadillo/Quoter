@@ -22,10 +22,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('cliente_id', sa.Integer(), nullable=False),
     sa.Column('folio', sa.String(length=10), nullable=False),
-    sa.Column('nombre', sa.String(length=20), nullable=False),
+    sa.Column('nombre', sa.String(length=100), nullable=False),
     sa.Column('fecha', sa.String(length=10), nullable=False),
-    sa.Column('resumen', sa.String(length=200), nullable=False),
-    sa.Column('importe', sa.Float(), nullable=True),
+    sa.Column('resumen', sa.Text(), nullable=False),
+    sa.Column('importe', sa.String(20), nullable=True),
     sa.ForeignKeyConstraint(['cliente_id'], ['clientes.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

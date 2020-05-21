@@ -12,7 +12,7 @@ class Usuario(UserMixin, db.Model):
     calle_numero     = db.Column(db.String(100))
     colonia          = db.Column(db.String(100))
     municipio        = db.Column(db.String(100))
-    cp               = db.Column(db.Integer)
+    cp               = db.Column(db.String(5))
     estado           = db.Column(db.String(100))
     telefono         = db.Column(db.String(100))
     correo           = db.Column(db.String(100), unique=True, index=True)
@@ -48,7 +48,7 @@ class Cliente(db.Model):
     calle_numero    = db.Column(db.String(100))
     colonia         = db.Column(db.String(100))
     municipio       = db.Column(db.String(100))
-    cp              = db.Column(db.Integer)
+    cp              = db.Column(db.String(5))
     estado          = db.Column(db.String(100))
 
     cotizaciones = db.relationship('Cotizacion', backref='cliente', lazy='dynamic')
@@ -63,10 +63,10 @@ class Cotizacion(db.Model):
     id          = db.Column(db.Integer, primary_key=True, nullable=False)
     cliente_id  = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
     folio       = db.Column(db.String(10), nullable=False, index=True, unique=True)
-    nombre      = db.Column(db.String(20), nullable=False)
+    nombre      = db.Column(db.String(100), nullable=False)
     fecha       = db.Column(db.String(10), nullable=False)
-    resumen     = db.Column(db.String(200), nullable=False)
-    importe     = db.Column(db.Float, nullable=True)
+    resumen     = db.Column(db.Text(), nullable=False)
+    importe     = db.Column(db.String(20), nullable=True)
 
     def __repr__(self):
         return '<Cotizacion %r>' % self.folio
