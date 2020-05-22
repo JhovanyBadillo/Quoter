@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Mis productos | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<header>
+    <div>
+        <h1>
+            Mis productos
+        </h1>
+    </div>
+    <div>
+        <h2>
+            Aquí encontrarás todos tus productos
+        </h2>
+    </div>
+</header>
+
+<section>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>SKU</td>
+                    <td>Descripción</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in mis_productos %}
+                <tr>
+                    <td>{{ producto.sku }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock page_content %}
