@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Productos | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<header>
+    <h1>Listado de productos por cliente</h1>
+</header>
+
+<section>
+    <div>
+        <div>
+            <p>
+                <h2>{{ cliente.razon_social }}</h2>
+            </p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>SKU</td>
+                    <td>Descripción</td>
+                    <td>Precio Unitario</td>
+                    <td>Modificar</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in cliente.productos.all() %}
+                <tr>
+                    <td>{{ producto.sku }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>{{ producto.precio_unitario }}</td>
+                    <td>
+                        <a href="{{ url_for('products.editar_producto', sku=producto.sku) }}">Ir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section>
+    <div>
+        <p>
+            <a href="{{ url_for('products.agregar_producto', cliente=cliente.nombre_corto) }}">Agregar producto</a>
+        </p>
+    </div>
+</section>
+
+{% endblock page_content %}

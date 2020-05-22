@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Editar producto | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<section>
+    <div>
+        <form action="{{ url_for('products.editar_producto', sku=producto.sku) }}" method="POST">
+            <div>
+                <input type="text" name="sku" id="sku" value="{{ producto.sku }}" placeholder="SKU" required>
+            </div>
+            <div>
+                <input type="text" name="medicion" id="medicion" value="{{ producto.medicion }}" placeholder="Unidad de Medida" required>
+            </div>
+            <div>
+                <input type="text" name="descripcion" id="descripcion" value="{{ producto.descripcion }}" placeholder="Descripción" required>
+            </div>
+            <div>
+                <input type="text" name="precio_unitario" value="{{ producto.precio_unitario }}" placeholder="Precio Unitario">
+            </div>
+            <div>
+                <input type="submit" value="Guardar cambios"><a href="{{ url_for('products.listado_productos', cliente=cliente.nombre_corto) }}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock page_content %}

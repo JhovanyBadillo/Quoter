@@ -15,6 +15,7 @@
                     <td>Razón Social</td>
                     <td>RFC</td>
                     <td>Información</td>
+                    <td>Productos</td>
                     <td>Historial de cotizaciones</td>
                 </tr>
             </thead>
@@ -25,6 +26,9 @@
                     <td>{{ cliente.rfc }}</td>
                     <td>
                         <a href="{{ url_for('clients.editar_cliente', cliente=cliente.nombre_corto) }}">Detalles</a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('products.listado_productos', cliente=cliente.nombre_corto) }}">Ver</a>
                     </td>
                     <td>
                         <a href="{{ url_for('clients.historial', cliente=cliente.nombre_corto) }}">Ver</a>

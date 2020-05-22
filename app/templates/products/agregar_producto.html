@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar producto | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<section>
+    <div>
+        <form action="{{ url_for('products.agregar_producto', cliente=cliente.nombre_corto) }}" method="POST">
+            <div>
+                <input type="text" name="sku" id="sku" placeholder="SKU" required>
+            </div>
+            <div>
+                <input type="text" name="medicion" id="medicion" placeholder="Unidad de Medida" required>
+            </div>
+            <div>
+                <input type="text" name="descripcion" id="descripcion" placeholder="Descripción" required>
+            </div>
+            <div>
+                <input type="text" name="precio_unitario" placeholder="Precio Unitario">
+            </div>
+            <div>
+                <input type="submit" value="Agregar Producto">
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock page_content %}
