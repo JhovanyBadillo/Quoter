@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+{% endblock styles %}
+
 {% block navbar %}
+<!-- Navigation -->
+<nav class="land-nav">
+    <a href="{{ url_for('main.index') }}" class="logo">Quoter</a>
+    <a href="{{ url_for('auth.login') }}" class="auth">Iniciar Sesión</a>
+</nav>
 {% endblock navbar %}
 
 {% block page_content %}
-<header>
-    <h1>Quoter</h1>
+<header class="showcase">
+    <h2>Dynamic quotations generator</h2>
+    <p>Registra tu negocio, agrega tus productos <br> y cotiza para tus clientes</p>
+    <a href="{{ url_for('auth.signup') }}" class="btn">Registrarse <i class="fas fa-chevron-right"></i></a>
 </header>
-<section>
-    <div>
-        <a href="{{ url_for('auth.login') }}">Iniciar Sesión</a>
-        <a href="{{ url_for('auth.signup') }}">Registrarse</a>
-    </div>
-</section>
 {% endblock page_content %}

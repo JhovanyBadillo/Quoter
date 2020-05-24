@@ -1,38 +1,39 @@
-{% extends "base.html" %}
+{% extends "auth/auth_base.html" %}
 
 {% block title %}Registro | Quoter{% endblock %}
 
-{% block navbar %}
-{% endblock %}
+{% block auth %}
+<a href="{{ url_for('auth.login') }}" class="auth">Iniciar Sesión</a>
+{% endblock auth %}
 
 {% block page_content %}
 
-<header>
-    <h1>Registro</h1>
-</header>
 
-<section>
+<div class="signup">
+    <header>
+        <h1>Registro</h1>
+    </header>
     <form action="{{ url_for('auth.signup') }}" method="post">
         <p>
-            <input type="email" name="email" placeholder="Correo electrónico">
+            <input type="email" name="email" placeholder="Correo electrónico" required>
         </p>
         <p>
-            <input type="password" name="password" id="password" placeholder="Contraseña">
+            <input type="password" name="password" id="password" placeholder="Contraseña" required>
         </p>
         <p>
-            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña">
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña" required>
         </p>
         <p>
-            <input type="submit" value="Registrarse">
+            <input type="submit" value="Registrarse" class="btn-submit">
         </p>
     </form>
+</div>
 
-    <p>
-        ¿Ya estás registrado?
-        <a href="{{ url_for('auth.login') }}">Click aquí para iniciar sesión</a>
-    </p>
+<p>
+    ¿Ya estás registrado?
+    <a href="{{ url_for('auth.login') }}">Click aquí para iniciar sesión</a>
+</p>
 
-</section>
 {% endblock page_content %}
 
 {% block scripts %}

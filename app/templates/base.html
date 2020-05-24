@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% endblock styles %}
     <title>{% block title %}Quoter{% endblock title %}</title>
     {% block icons %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -12,46 +15,49 @@
 </head>
 
 <body>
-    {% block navbar %}
-    <nav>
-        <a href="{{ url_for('main.menu') }}">Quoter</a>
-        <ul>
-            <li>
-                <a href="{{ url_for('main.menu') }}">Home</a>
-            </li>
-            <li>
-                <a href="{{ url_for('clients.listado_clientes') }}">Clientes</a>
-            </li>
-            <li>
-                <a href="#">Contactos</a>
-            </li>
-            <li>
-                <a href="{{ url_for('main.mis_productos') }}">Productos</a>
-            </li>
-            <li>
-                <a href="#">Cotizaciones</a>
-            </li>
-            <li>
-                <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
-            </li>
-        </ul>
-    </nav>
-    {% endblock navbar %}
+    <div class="container">
 
-    {% block content %}
+        {% block navbar %}
+        <nav>
+            <a href="{{ url_for('main.menu') }}">Quoter</a>
+            <ul>
+                <li>
+                    <a href="{{ url_for('main.menu') }}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('clients.listado_clientes') }}">Clientes</a>
+                </li>
+                <li>
+                    <a href="#">Contactos</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('main.mis_productos') }}">Productos</a>
+                </li>
+                <li>
+                    <a href="#">Cotizaciones</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
+        {% endblock navbar %}
 
-    {% for message in get_flashed_messages() %}
-    <div>
-        <p>{{ message }}</p>
+        {% block content %}
+
+        {% for message in get_flashed_messages() %}
+        <div>
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+
+        {% block page_content %}
+
+        {% endblock page_content %}
+
+        {% endblock content %}
+
     </div>
-    {% endfor %}
-
-    {% block page_content %}
-
-    {% endblock page_content %}
-    
-    {% endblock content %}
-
     {% block scripts %}
     {% endblock scripts %}
 </body>

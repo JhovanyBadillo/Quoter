@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <title>{% block title %}Quoter{% endblock title %}</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Navigation bar -->
+        <nav class="land-nav">
+            <a href="{{ url_for('main.index') }}" class="logo">Quoter</a>
+            {% block auth %}{% endblock auth %}
+        </nav>
+
+        {% block content %}
+
+        {% for message in get_flashed_messages() %}
+        <div>
+            <p>{{ message }}</p>
+        </div>
+        {% endfor %}
+
+        {% block page_content %}
+        {% endblock page_content %}
+
+        {% endblock content %}
+
+    </div>
+    
+    {% block scripts %}
+    {% endblock scripts %}
+
+</body>
+
+</html>
