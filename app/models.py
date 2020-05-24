@@ -18,6 +18,7 @@ class Usuario(UserMixin, db.Model):
     correo           = db.Column(db.String(100), unique=True, index=True)
     rfc              = db.Column(db.String(100), unique=True)
     password_hash    = db.Column(db.String(128))
+    datos_completos  = db.Column(db.String(1), default='N')
 
     clientes = db.relationship('Cliente', backref='usuario', lazy='dynamic')
 
