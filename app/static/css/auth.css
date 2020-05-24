@@ -48,8 +48,8 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding-left: 10px;
-    align-items: flex-start;
     background: #f5f4f0;
 }
 
@@ -59,8 +59,8 @@ ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding-left: 10px;
-    align-items: flex-start;
     background: #f5f4f0;
 }
 

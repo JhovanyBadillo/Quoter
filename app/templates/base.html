@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block styles %}
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% endblock styles %}
     <title>{% block title %}Quoter{% endblock title %}</title>
@@ -15,31 +18,28 @@
 </head>
 
 <body>
+
+    {% block menu_btn %}
+    <div class="menu-btn">
+        <i class="fas fa-bars fa-2x"></i>
+    </div>
+    {% endblock menu_btn %}
+
     <div class="container">
 
         {% block navbar %}
-        <nav>
-            <a href="{{ url_for('main.menu') }}">Quoter</a>
-            <ul>
-                <li>
-                    <a href="{{ url_for('main.menu') }}">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('clients.listado_clientes') }}">Clientes</a>
-                </li>
-                <li>
-                    <a href="#">Contactos</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('main.mis_productos') }}">Productos</a>
-                </li>
-                <li>
-                    <a href="#">Cotizaciones</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
-                </li>
+        <nav class="main-nav">
+            <a href="{{ url_for('main.menu') }}" class="logo">Quoter</a>
+
+            <ul class="main-menu">
+                <li><a href="{{ url_for('main.menu') }}">Home</a></li>
+                <li><a href="{{ url_for('clients.listado_clientes') }}">Clientes</a></li>
+                <li><a href="#">Contactos</a></li>
+                <li><a href="{{ url_for('main.mis_productos') }}">Productos</a></li>
+                <li><a href="#">Cotizaciones</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
             </ul>
+
         </nav>
         {% endblock navbar %}
 
@@ -51,14 +51,21 @@
         </div>
         {% endfor %}
 
-        {% block page_content %}
+        <div class="main-content">
+            {% block page_content %}
 
-        {% endblock page_content %}
+            {% endblock page_content %}
+        </div>
 
         {% endblock content %}
 
     </div>
+
     {% block scripts %}
+    <script>
+        document.querySelector('.menu-btn').addEventListener('click', () => document.querySelector('.main-menu').classList.toggle('show'));
+        document.querySelector('.container').addEventListener('click', () => document.querySelector('.main-menu').classList.remove('show'));
+    </script>
     {% endblock scripts %}
 </body>
 

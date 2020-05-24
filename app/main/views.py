@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, session, flash, current_app
+from flask import render_template, redirect, url_for, session, flash, current_app, request
 from flask_login import login_required, current_user
 from . import main
 from .forms import LoginForm, RegistroUsuarioForm
@@ -16,6 +16,13 @@ def index():
 @login_required
 def menu():
     return render_template('menu.html')
+
+# @main.route('/mis-datos', methods=['GET', 'POST'])
+# def mis_datos():
+#     if request.method == 'POST':
+#         return redirect(url_for('main.menu'))
+#     else:
+
 
 @main.route('/mis-productos')
 @login_required

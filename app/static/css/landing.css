@@ -63,6 +63,11 @@ ul {
     padding: 10px 15px;
     background: black;
     color: #f5f4f0;
+    font-size: 15px;
+}
+
+.btn i {
+    margin-left: 5px;
 }
 
 .btn:hover {
