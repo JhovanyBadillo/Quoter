@@ -17,7 +17,7 @@ class Config:
         ['true', 'on', '1']
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SEND_FILE_MAX_AGE_DEFAULT = 30  # Sets Cache-Control header with max-age=30
+    SEND_FILE_MAX_AGE_DEFAULT = 15  # Sets Cache-Control header with max-age=30
     # PERMANENT_SESSION_LIFETIME = timedelta(seconds=900)
 
     @staticmethod
