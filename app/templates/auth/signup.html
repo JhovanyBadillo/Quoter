@@ -8,12 +8,11 @@
 
 {% block page_content %}
 
-
 <div class="signup">
     <header>
         <h1>Registro</h1>
     </header>
-    <form action="{{ url_for('auth.signup') }}" method="post">
+    <form action="{{ url_for('auth.signup') }}" method="POST">
         <p>
             <input type="email" name="email" placeholder="Correo electrónico" required>
         </p>

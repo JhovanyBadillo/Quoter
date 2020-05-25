@@ -15,14 +15,54 @@ def index():
 @main.route('/menu')
 @login_required
 def menu():
-    return render_template('menu.html')
+    datos_completos = current_user.datos_completos
+    return render_template('menu.html', datos_completos=datos_completos)
 
-# @main.route('/mis-datos', methods=['GET', 'POST'])
-# def mis_datos():
-#     if request.method == 'POST':
-#         return redirect(url_for('main.menu'))
-#     else:
+@main.route('/mis-datos', methods=['GET', 'POST'])
+@login_required
+def mis_datos():
+    if request.method == 'POST':
+        print(request.form)
+        if 'fisica' in request.form.keys():
+            return redirect(url_for('main.mis_datos_fisica'))
+        elif 'moral' in request.form.keys():
+            return redirect(url_for('main.mis_datos_moral'))
+        else:
+            return redirect(url_for('main.menu'))
+    else:
+        return render_template('mis_datos.html')
 
+@main.route('/mis-datos/fisica', methods=['GET', 'POST'])
+@login_required
+def mis_datos_fisica():
+    me = current_user
+    if request.method == 'POST':
+        print(request.form)
+        for dato in request.form.keys():
+            setattr(me, dato, request.form[dato])
+        me.datos_completos = 'Y'
+        db.session.add(me)
+        db.session.commit()
+        flash('Información almacenada. Ahora ya puedes generar cotizaciones')
+        return redirect(url_for('main.menu'))
+    else:
+        return render_template('mis_datos_fisica.html', me=me)
+
+@main.route('/mis-datos/moral', methods=['GET', 'POST'])
+@login_required
+def mis_datos_moral():
+    me = current_user
+    if request.method == 'POST':
+        print(request.form)
+        for dato in request.form.keys():
+            setattr(me, dato, request.form[dato])
+        me.datos_completos = 'Y'
+        db.session.add(me)
+        db.session.commit()
+        flash('Información almacenada. Ahora ya puedes generar cotizaciones')
+        return redirect(url_for('main.menu'))
+    else:
+        return render_template('mis_datos_moral.html', me=me)
 
 @main.route('/mis-productos')
 @login_required

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Mis datos | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<section class="datos">
+    <h2>Recuerda que estos datos son usados para generar tus cotizaciones. Ingrésalos cuidadosamente.</h2>
+    <form action="{{ url_for('main.mis_datos_fisica') }}" method="POST">
+        <p>
+            <input type="text" name="nombre" placeholder="Nombre" required>
+        </p>
+        <p>
+            <input type="text" name="apellido_paterno" placeholder="Apellido Paterno" required>
+        </p>
+        <p>
+            <input type="text" name="apellido_materno" placeholder="Apellido Materno" required>
+        </p>
+        <p>
+            <input type="text" name="rfc" placeholder="RFC" required>
+        </p>
+        <p>
+            <input type="text" name="calle_numero" placeholder="Calle y Número" required>
+        </p>
+        <p>
+            <input type="text" name="colonia" placeholder="Colonia" required>
+        </p>
+        <p>
+            <input type="text" name="municipio" placeholder="Municipio o Alcaldía" required>
+        </p>
+        <p>
+            <input type="text" name="estado" placeholder="Estado" required>
+        </p>
+        <p>
+            <input type="text" name="cp" placeholder="Código Postal" required>
+        </p>
+        <p>
+            <input type="text" name="telefono" placeholder="Teléfono" required>
+        </p>
+        <p>
+            <input type="email" name="email" value="{{ me.correo }}" placeholder="Correo electrónico" readonly>
+        </p>
+        <p>
+            <input type="submit" value="Guardar cambios" class="btn-submit">
+        </p>
+    </form>
+</section>
+
+{% endblock page_content %}

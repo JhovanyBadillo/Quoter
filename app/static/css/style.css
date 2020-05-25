@@ -95,6 +95,29 @@ ul {
     opacity: 0.8;
 }
 
+.btn-submit {
+    cursor: pointer;
+    background: black;
+    color:#f5f4f0;
+    border: none;
+    padding: 5px 15px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+.btn-submit:hover {
+    opacity: 0.8;
+}
+
+.main-content .datos .persona:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.main-content .datos .check:hover {
+    cursor: pointer;
+}
+
 @media(max-width: 700px) {
     .menu-btn {
         display: block;

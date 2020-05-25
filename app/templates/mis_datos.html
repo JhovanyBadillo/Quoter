@@ -5,7 +5,39 @@
 {% block page_content %}
 
 <section class="datos">
-    
+    <header>
+        <h1>¿Persona Física o Moral?</h1>
+    </header>
+    <form action="{{ url_for('main.mis_datos') }}" method="POST">
+        <p class="persona" id="persona-fisica" onclick="selectOption(this)"><input type="radio" name="fisica" class="check" id="check-fisica"
+                onchange="optionChange(this)"> Persona Física</p>
+        <p class="persona" id="persona-moral" onclick="selectOption(this)"><input type="radio" name="moral" class="check" id="check-moral"
+                onchange="optionChange(this)"> Persona Moral</p>
+        <p><input type="submit" value="Enviar" class="btn-submit"></p>
+    </form>
 </section>
 
 {% endblock page_content %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+
+    document.getElementById("check-fisica").click();
+    function optionChange(obj) {
+        let options = document.getElementsByClassName("check");
+        for (let option of options) {
+            option.checked = false;
+        }
+        obj.checked = true;
+    }
+    function selectOption(obj) {
+        if (obj.id == 'persona-fisica') {
+            document.getElementById("check-fisica").click();
+        } else if (obj.id == 'persona-moral') {
+            document.getElementById("check-moral").click();
+        }
+    }
+
+</script>
+{% endblock scripts %}
