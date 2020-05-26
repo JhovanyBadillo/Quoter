@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Cotizaciones | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<header>
+    <h1>¿Para qué cliente es la cotización?</h1>
+</header>
+
+<form action="{{ url_for('quotations.elegir_cliente') }}" method="POST">
+    <select name="cliente">
+        {% for cliente in clientes %}
+        <option value="{{ cliente }}">{{ cliente }}</option>
+        {% endfor %}
+    </select>
+    <p>
+        <input type="submit" value="Siguiente" class="btn-submit">
+    </p>
+</form>
+
+{% endblock page_content %}

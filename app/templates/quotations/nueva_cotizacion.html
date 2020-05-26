@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva cotización | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<header>
+    <h1>Selecciona los productos a cotizar</h1>
+</header>
+
+<section>
+    <div class="datos-cotizacion">
+        <form action="{{ url_for('quotations.nueva_cotizacion', cliente=cliente.nombre_corto, categorias_a_cotizar=categorias_a_cotizar) }}" method="POST">
+            {% for p in range(categorias_a_cotizar) %}
+            <p>
+                Producto <select name="producto{{ p }}">
+                    {% for producto in cliente.productos %}
+                    <option value="{{ producto.sku }}">{{ producto.descripcion }}</option>
+                    {% endfor %}
+                </select>
+                Cantidad <input type="number" name="cantidad-producto{{ p }}" value=1 min=1 max=100>
+            </p>
+            {% endfor %}
+            <p>
+                <input type="submit" value="Generar Cotización" class="btn-submit">
+            </p>
+        </form>
+    </div>
+</section>
+
+{% endblock page_content %}

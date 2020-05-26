@@ -23,11 +23,13 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     from .clients import clients as clients_blueprint
     from .products import products as products_blueprint
+    from .quotations import quotations as quotations_blueprint
     
     app.register_blueprint(main_blueprint)
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(clients_blueprint, url_prefix='/clientes')
     app.register_blueprint(products_blueprint, url_prefix='/productos')
+    app.register_blueprint(quotations_blueprint, url_prefix='/cotizaciones')
 
     return app
 

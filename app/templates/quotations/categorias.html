@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Cotizaciones | Quoter{% endblock title %}
+
+{% block page_content %}
+
+<form action="{{ url_for('quotations.categorias', cliente=cliente) }}" method="POST">
+    <p>
+        <h2>¿Cuántas categorías de productos vas a cotizar?</h2>
+    </p>
+    <input type="number" name="categorias" value=0 min=0 max={{ total_categorias_productos }}>
+    <p>
+        <input type="submit" value="Siguiente" class="btn-submit">
+    </p>
+</form>
+
+{% endblock page_content %}

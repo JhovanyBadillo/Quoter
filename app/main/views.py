@@ -72,3 +72,8 @@ def mis_productos():
         for producto in cliente.productos.all():
             mis_productos.append(producto)
     return render_template('mis_productos.html', mis_productos=mis_productos)
+
+@main.route('/mis_cotizaciones')
+@login_required
+def mis_cotizaciones():
+    return render_template('mis_cotizaciones.html')

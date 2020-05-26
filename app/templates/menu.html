@@ -7,7 +7,7 @@
 <section>
     {% if datos_completos == 'Y' %}
     <h2>¿Tienes un pedido?</h2>
-    <a href="#" class="btn">Cotizar <i class="fas fa-chevron-right"></i></a>
+    <a href="{{ url_for('quotations.elegir_cliente') }}" class="btn">Cotizar <i class="fas fa-chevron-right"></i></a>
     {% else %}
     <h2>Para cotizar, primero completa tus datos</h2>
     <a href="{{ url_for('main.mis_datos') }}" class="btn">Aquí <i class="fas fa-chevron-right"></i></a>
