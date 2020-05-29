@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotización</title>
 </head>
+
 <body>
     <header>
         <h1>SEAL Suministros Industriales</h1>
@@ -13,7 +15,70 @@
     <section>
         Cotización para: {{ cliente.razon_social }}
         Folio:
+        <table>
+            <thead>
+                <tr>
+                    <td>Cantidad</td>
+                    <td>Unidad</td>
+                    <td>Descripción</td>
+                    <td>Precio Unitario</td>
+                    <td>Importe</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in pedido['productos'].keys() %}
+                <tr>
+                    <td>{{ pedido['productos'][producto]['cantidad'] }}</td>
+                    <td>{{ pedido['productos'][producto]['objProducto'].medicion }}</td>
+                    {% if not (pedido['productos'][producto]['descripcion_adicional'] or pedido['productos'][producto]['notas']) %}
+                    <td>{{ pedido['productos'][producto]['objProducto'].descripcion }}</td>
+                    {% elif (pedido['productos'][producto]['descripcion_adicional'] and not pedido['productos'][producto]['notas']) %}
+                    <td>{{ pedido['productos'][producto]['objProducto'].descripcion }}<br>
+                        {{ pedido['productos'][producto]['descripcion_adicional'] }}<br>
+                    {% else %}
+                    <td>{{ pedido['productos'][producto]['objProducto'].descripcion }}<br>
+                        {{ pedido['productos'][producto]['descripcion_adicional'] }}<br>
+                        {{ pedido['productos'][producto]['notas'] }}</td>
+                    {% endif %}
+
+                    <td>{{ pedido['productos'][producto]['objProducto'].precio_unitario | number_format }}</td>
+                    <td>{{ pedido['productos'][producto]['importe'] | number_format }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>Subtotal:</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ pedido['subtotal'] | number_format }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>IVA 16%</td>
+                    <td>{{ pedido['iva'] | number_format }}</td>
+                </tr>
+                <tr>
+                    <td>Total con letra:</td>
+                    <td></td>
+                    <td></td>
+                    <td>Total:</td>
+                    <td>{{ pedido['total'] | number_format }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            ( {{ pedido['cantidad_letra'] }} )
+        </p>
+        <p>
+            Tiempo de entrega: {{ pedido['tiempo_entrega_dias'] }} DÍAS
+        </p>
+        <p>
+            Condiciones de pago: {{ pedido['pago_anticipado'] }}% ANTICIPO
+        </p>
     </section>
-    
+
 </body>
+
 </html>

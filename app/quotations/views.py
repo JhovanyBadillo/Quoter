@@ -55,16 +55,28 @@ def nueva_cotizacion(cliente, categorias_a_cotizar):
                 ('objProducto', Producto.query.filter_by(sku=dict_info_cotizacion[f'producto{categoria}']).first()),
                 ('cantidad', dict_info_cotizacion[f'cantidad-producto{categoria}']),
                 ('descripcion_adicional', dict_info_cotizacion[f'descripcion-adicional-producto{categoria}']),
-                ('notas', dict_info_cotizacion[f'notas-producto{categoria}'])
+                ('notas', dict_info_cotizacion[f'notas-producto{categoria}']),
+                ('importe', 0)
             ])
-        # print(json.dumps(pedido, indent=4))
-        importe = 0
-        for item in pedido['productos'].keys():
-            importe += float(pedido['productos'][item]['objProducto'].precio_unitario)*int(pedido['productos'][item]['cantidad'])
-        pedido['importe'] = importe
         pedido['tiempo_entrega_dias'] = dict_info_cotizacion['tiempo-entrega-dias']
         pedido['pago_anticipado'] = dict_info_cotizacion['pago-anticipado']
-        parte_entera, centavos = cantidad_letra_from_float(importe)
+        # print(json.dumps(pedido, indent=4))
+        # Cálculo de importe por producto: precio_unitario*cantidad
+        # Cálculo de subtotal: suma_i(importe_i)
+        subtotal = 0
+        for item in pedido['productos'].keys():
+            importe = 0
+            importe += float(pedido['productos'][item]['objProducto'].precio_unitario)*int(pedido['productos'][item]['cantidad'])
+            pedido['productos'][item]['importe'] = importe
+            subtotal += importe
+            
+        pedido['subtotal'] = subtotal
+        # Cálculo del IVA
+        iva = 0.16*subtotal
+        total = subtotal + iva
+        parte_entera, centavos = cantidad_letra_from_float(total)
+        pedido['iva'] = iva
+        pedido['total'] = total
         pedido['cantidad_letra'] = ' '.join([parte_entera, 'pesos', centavos + '/100', 'm.n.']).upper()
         print(pedido)
         return render_template('quotations/template_cotizacion.html', cliente=current_cliente, pedido=pedido)
@@ -73,3 +85,11 @@ def nueva_cotizacion(cliente, categorias_a_cotizar):
             return render_template('quotations/nueva_cotizacion.html', cliente=current_cliente, categorias_a_cotizar=categorias_a_cotizar)
         else:
             abort(404)
+
+@quotations.app_template_filter()
+def number_format(cantidad):
+    """
+    Se da formato de moneda a una cantidad dada como string o como float.
+    Ejemplo: '18100' --> '$ 18,100.00'
+    """
+    return '$ {:,.2f}'.format(float(cantidad)) if type(cantidad) is str else '$ {:,.2f}'.format(cantidad)
