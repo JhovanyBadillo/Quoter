@@ -12,17 +12,33 @@
     <div class="datos-cotizacion">
         <form action="{{ url_for('quotations.nueva_cotizacion', cliente=cliente.nombre_corto, categorias_a_cotizar=categorias_a_cotizar) }}" method="POST">
             {% for p in range(categorias_a_cotizar) %}
-            <p>
-                Producto <select name="producto{{ p }}">
+            <div>
+                <label for="product-option">Producto:</label>
+                <select name="producto{{ p }}" id="product-option">
                     {% for producto in cliente.productos %}
                     <option value="{{ producto.sku }}">{{ producto.descripcion }}</option>
                     {% endfor %}
                 </select>
-                Cantidad <input type="number" name="cantidad-producto{{ p }}" value=1 min=1 max=100>
-            </p>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad-producto{{ p }}" id="cantidad" value=1 min=1 max=100><br>
+                <br><label for="add-description">Descripción adicional:</label><br>
+                <!-- <input type="text" size="50" name="descripcion-adicional-producto{#{ p }#}" id="add-description"><br> -->
+                <textarea name="descripcion-adicional-producto{{ p }}" id="add-description" cols="30" rows="5"></textarea><br>
+                <br><label for="notas">Notas:</label><br>
+                <textarea name="notas-producto{{ p }}" id="notas" cols="30" rows="5"></textarea>
+            </div><br><br>
             {% endfor %}
             <p>
-                <input type="submit" value="Generar Cotización" class="btn-submit">
+                <h2>Detalles de la cotización</h2>
+            </p>
+            <label for="tiempo">Tiempo de entrega en días:</label><br>
+            <input type="number" name="tiempo-entrega-dias" id="tiempo" value=1 min=1><br>
+            <br><label for="pago-anticipado">Pago anticipado del</label><br>
+            <input type="number" name="pago-anticipado" id="pago-anticipado" value=50 min=0 max=100>%
+            <p>
+                <br><center>
+                    <input type="submit" value="Generar Cotización" class="btn-submit">
+                </center>
             </p>
         </form>
     </div>

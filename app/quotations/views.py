@@ -1,8 +1,9 @@
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, flash, abort, jsonify
 from flask_login import login_required, current_user
 from . import quotations
-from ..models import Cliente, Cotizacion
+from ..models import Cliente, Cotizacion, Producto
 from .. import db
+import json
 
 @quotations.route('/elegir-cliente', methods=['GET', 'POST'])
 @login_required
@@ -44,8 +45,28 @@ def nueva_cotizacion(cliente, categorias_a_cotizar):
     Recurso que importa la información de los productos y número de categorías a cotizar.
     """
     current_cliente = Cliente.query.filter_by(nombre_corto=cliente).first()
+    total_categorias_productos = len([producto for producto in current_cliente.productos])
     if request.method == 'POST':
-        print(request.form)
-        return '<h1>Nueva cotización para {}</h1>'.format(cliente)
+        dict_info_cotizacion = request.form.to_dict()
+        pedido = {'productos': {}}
+        for categoria in range(categorias_a_cotizar):
+            pedido['productos'][categoria] = dict([
+                ('objProducto', Producto.query.filter_by(sku=dict_info_cotizacion[f'producto{categoria}']).first()),
+                ('cantidad', dict_info_cotizacion[f'cantidad-producto{categoria}']),
+                ('descripcion_adicional', dict_info_cotizacion[f'descripcion-adicional-producto{categoria}']),
+                ('notas', dict_info_cotizacion[f'notas-producto{categoria}'])
+            ])
+        # print(json.dumps(pedido, indent=4))
+        importe = 0
+        for item in pedido['productos'].keys():
+            importe += float(pedido['productos'][item]['objProducto'].precio_unitario)*int(pedido['productos'][item]['cantidad'])
+        pedido['importe'] = importe
+        pedido['tiempo_entrega_dias'] = dict_info_cotizacion['tiempo-entrega-dias']
+        pedido['pago_anticipado'] = dict_info_cotizacion['pago-anticipado']
+        print(pedido)
+        return render_template('quotations/template_cotizacion.html', cliente=current_cliente, pedido=pedido)
     else:
-        return render_template('quotations/nueva_cotizacion.html', cliente=current_cliente, categorias_a_cotizar=categorias_a_cotizar)
+        if not categorias_a_cotizar > total_categorias_productos:
+            return render_template('quotations/nueva_cotizacion.html', cliente=current_cliente, categorias_a_cotizar=categorias_a_cotizar)
+        else:
+            abort(404)            
