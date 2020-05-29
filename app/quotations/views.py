@@ -4,6 +4,7 @@ from . import quotations
 from ..models import Cliente, Cotizacion, Producto
 from .. import db
 import json
+from ..utils import cantidad_letra_from_float
 
 @quotations.route('/elegir-cliente', methods=['GET', 'POST'])
 @login_required
@@ -63,10 +64,12 @@ def nueva_cotizacion(cliente, categorias_a_cotizar):
         pedido['importe'] = importe
         pedido['tiempo_entrega_dias'] = dict_info_cotizacion['tiempo-entrega-dias']
         pedido['pago_anticipado'] = dict_info_cotizacion['pago-anticipado']
+        parte_entera, centavos = cantidad_letra_from_float(importe)
+        pedido['cantidad_letra'] = ' '.join([parte_entera, 'pesos', centavos + '/100', 'm.n.']).upper()
         print(pedido)
         return render_template('quotations/template_cotizacion.html', cliente=current_cliente, pedido=pedido)
     else:
         if not categorias_a_cotizar > total_categorias_productos:
             return render_template('quotations/nueva_cotizacion.html', cliente=current_cliente, categorias_a_cotizar=categorias_a_cotizar)
         else:
-            abort(404)            
+            abort(404)
