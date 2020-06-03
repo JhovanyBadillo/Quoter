@@ -9,7 +9,7 @@ class Config:
     de vida en la caché del navegador de los archivos estáticos, i.e.,
     los que están en la carpeta static (js, css, etc).
     """
-    SECRET_KEY = os.environ.get('SECRET_KEY', default=b'Ana')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = os.environ.get('MAIL_SERVER', default='smtp.googlemail.com')
     MAIL_PORT = int(os.environ.get('MAIL_PORT', default='587'))
